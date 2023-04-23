@@ -1,0 +1,19 @@
+{
+	"name": "forkify-fullstack",
+	"version": "1.0.0",
+	"description": "fullstack forkify app",
+	"main": "server.js",
+	"scripts": {
+		"start": "nodemon server.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"mongoose": "^7.0.4"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.22"
+	}
+}
