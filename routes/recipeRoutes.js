@@ -1,70 +1,71 @@
 const express = require('express');
 const router = express.Router();
-const recipes = [
-	{
-		id: 1,
-		text: 'this is text 1',
-		tag: 'test',
-		username: 'daz',
-		date: '2002-10-02',
-	},
-	{
-		id: 2,
-		text: 'this is text 1',
-		tag: 'another test',
-		username: 'dazdee',
-		date: '2002-10-03',
-	},
-];
+const Recipe = require('../models/Recipe');
+const { findByIdAndDelete } = require('../models/Recipe');
 
-router.get('/', (req, res) => {
-	res.json({ success: true, data: recipes });
+//* Get all recipes
+router.get('/', async (req, res) => {
+	try {
+		const recipes = await Recipe.find();
+		res.json({ success: true, data: recipes });
+	} catch (error) {
+		res.status(500).json({ success: false, error: 'Something went wrong' });
+	}
 });
 
-router.get('/:id', (req, res) => {
-	const recipe = recipes.find((rec) => rec.id === +req.params.id);
-	if (!recipe) {
-		return res.status(404).json({ success: false, error: 'Recipe not found' });
+//*Get A single recipe
+router.get('/:id', async (req, res) => {
+	try {
+		const recipe = await Recipe.findById(req.params.id);
+		res.json({ success: true, data: recipe });
+	} catch (error) {
+		res.status(500).json({ success: false, error: 'Something went wrong' });
 	}
-	res.json({ success: true, data: recipe });
 });
 
 //* Add a new recipe
-router.post('/', (req, res) => {
-	const newRecipe = {
-		id: recipes.length + 1,
+router.post('/', async (req, res) => {
+	const recipe = new Recipe({
 		text: req.body.text,
 		tag: req.body.tag,
 		username: req.body.username,
-		date: new Date().toISOString().slice(0, 10),
-	};
-
-	recipes.push(newRecipe);
-	res.json({ success: true, data: newRecipe });
+	});
+	try {
+		const newRecipe = await recipe.save();
+		res.json({ success: true, data: newRecipe });
+	} catch (error) {
+		res.status(500).json({ success: false, error: 'Something went wrong' });
+	}
 });
 
 //* Update recipe
-router.put('/:id', (req, res) => {
-	const updateRecipe = recipes.find((rec) => rec.id === +req.params.id);
-	if (!updateRecipe) {
-		return res.status(404).json({ success: false, error: 'Recipe not found' });
+router.put('/:id', async (req, res) => {
+	try {
+		const updatedRecipe = await Recipe.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: {
+					text: req.body.text,
+					tag: req.body.tag,
+				},
+			},
+			{ new: true }
+		);
+		res.json({ success: true, data: updatedRecipe });
+	} catch (error) {
+		res.status(500).json({ success: false, error: 'Something went wrong!' });
+		console.log(error);
 	}
-
-	updateRecipe.text = req.body.text || updateRecipe.text;
-	updateRecipe.tag = req.body.tag || updateRecipe.tag;
-
-	res.json({ success: true, data: updateRecipe });
 });
 
 //* Delete a recipe
-router.delete('/:id', (req, res) => {
-	const deleteRecipe = recipes.find((rec) => rec.id === +req.params.id);
-	if (!deleteRecipe) {
-		return res.status(404).json({ success: false, error: 'Recipe not found' });
+router.delete('/:id', async (req, res) => {
+	try {
+		await Recipe.findByIdAndDelete(req.params.id);
+		res.json({ success: true, data: {} });
+	} catch {
+		res.status(500).json({ success: false, error: 'Something went wrong!' });
 	}
-	const index = recipes.indexOf(deleteRecipe);
-	recipes.splice(index, 1);
-	res.json({ success: true, data: {} });
 });
 
 module.exports = router;
