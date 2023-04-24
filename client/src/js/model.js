@@ -3,6 +3,19 @@ import { API_URL, RES_PER_PAGE, API_KEY } from './config.js';
 import { AJAX } from './helper.js';
 import recipeView from './views/recipeView.js';
 import bookmarksView from './views/bookmarksView.js';
+import RecipesApi from '../services/recipesApi.js';
+import axios from 'axios';
+
+async function getRecipes() {
+	try {
+		const recipe = await RecipesApi.getRecipesfromDB();
+		console.log(recipe.data.data);
+	} catch (error) {
+		console.log(`Something went wrong ${error}`);
+	}
+}
+
+getRecipes();
 
 export const state = {
 	recipe: {},
