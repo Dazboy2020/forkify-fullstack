@@ -3,19 +3,10 @@ import { API_URL, RES_PER_PAGE, API_KEY } from './config.js';
 import { AJAX } from './helper.js';
 import recipeView from './views/recipeView.js';
 import bookmarksView from './views/bookmarksView.js';
+
 import RecipesApi from '../services/recipesApi.js';
 import axios from 'axios';
-
-async function getRecipes() {
-	try {
-		const recipe = await RecipesApi.getRecipesfromDB();
-		console.log(recipe.data);
-	} catch (error) {
-		console.log(`Something went wrong ${error}`);
-	}
-}
-
-getRecipes();
+import { addRecipetoBookmarks } from './bookmarks.js';
 
 export const state = {
 	recipe: {},
@@ -27,25 +18,6 @@ export const state = {
 	},
 	bookmarks: [],
 };
-
-async function addRecipetoBookmarks(recipe) {
-	try {
-		const newBookmark = {
-			id: recipe.id,
-			title: recipe.title,
-			publisher: recipe.publisher,
-			sourceUrl: recipe.sourceUrl,
-			image: recipe.image,
-			servings: recipe.servings,
-			cookingTime: recipe.cookingTime,
-			ingredients: recipe.ingredients,
-		};
-		console.log(newBookmark);
-		await RecipesApi.bookmarkRecipe(newBookmark);
-	} catch (error) {
-		console.log(error);
-	}
-}
 
 const createRecipeObject = function (data) {
 	const { recipe } = data.data;
@@ -143,7 +115,6 @@ const init = function () {
 };
 
 init();
-console.log(state.bookmarks);
 
 const clearBookmarks = function () {
 	localStorage.clear('bookmarks');

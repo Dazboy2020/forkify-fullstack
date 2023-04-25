@@ -20,6 +20,7 @@ async function getSingleRecipe(req, res) {
 
 async function addNewRecipe(req, res) {
 	const recipe = new Recipe({
+		recipeID: req.body.recipeID,
 		title: req.body.title,
 		sourceUrl: req.body.sourceUrl,
 		image: req.body.image,
