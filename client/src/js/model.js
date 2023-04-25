@@ -9,7 +9,7 @@ import axios from 'axios';
 async function getRecipes() {
 	try {
 		const recipe = await RecipesApi.getRecipesfromDB();
-		console.log(recipe.data.data);
+		console.log(recipe.data);
 	} catch (error) {
 		console.log(`Something went wrong ${error}`);
 	}
@@ -27,6 +27,25 @@ export const state = {
 	},
 	bookmarks: [],
 };
+
+async function addRecipetoBookmarks(recipe) {
+	try {
+		const newBookmark = {
+			id: recipe.id,
+			title: recipe.title,
+			publisher: recipe.publisher,
+			sourceUrl: recipe.sourceUrl,
+			image: recipe.image,
+			servings: recipe.servings,
+			cookingTime: recipe.cookingTime,
+			ingredients: recipe.ingredients,
+		};
+		console.log(newBookmark);
+		await RecipesApi.bookmarkRecipe(newBookmark);
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 const createRecipeObject = function (data) {
 	const { recipe } = data.data;
@@ -47,7 +66,6 @@ export const loadRecipe = async function (id) {
 	try {
 		const data = await AJAX(`${API_URL}/${id}?key=${API_KEY}`);
 		state.recipe = createRecipeObject(data);
-
 		if (state.bookmarks.some((bookmark) => bookmark.id === id))
 			state.recipe.bookmarked = true;
 		else state.recipe.bookmarked = false;
@@ -102,10 +120,9 @@ export const updateServings = function (newServings) {
 export const addBookmark = function (recipe) {
 	//*add bookmark
 	state.bookmarks.push(recipe);
-
 	//*mark current recipe as bookmarked
 	state.recipe.bookmarked = true;
-
+	addRecipetoBookmarks(recipe);
 	persistBookmarks();
 };
 

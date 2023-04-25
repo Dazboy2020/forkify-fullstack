@@ -1,19 +1,29 @@
 const mongoose = require('mongoose');
 
 const RecipeSchema = new mongoose.Schema({
-	text: {
-		type: String,
-		required: [true, 'Please add a text field'],
+	bookmarked: {
+		type: Boolean,
 	},
-	tag: {
-		type: String,
-	},
-	username: {
+	title: {
 		type: String,
 	},
-	date: {
-		type: Date,
-		default: Date.now,
+	sourceUrl: {
+		type: String,
+	},
+	image: {
+		type: String,
+	},
+	publisher: {
+		type: String,
+	},
+	cookingTime: {
+		type: Number,
+	},
+	servings: {
+		type: Number,
+	},
+	ingredients: {
+		type: Array,
 	},
 });
 

@@ -20,9 +20,13 @@ async function getSingleRecipe(req, res) {
 
 async function addNewRecipe(req, res) {
 	const recipe = new Recipe({
-		text: req.body.text,
-		tag: req.body.tag,
-		username: req.body.username,
+		title: req.body.title,
+		sourceUrl: req.body.sourceUrl,
+		image: req.body.image,
+		publisher: req.body.publisher,
+		cookingTime: req.body.cookingTime,
+		servings: req.body.servings,
+		ingredients: req.body.ingredients,
 	});
 	try {
 		const newRecipe = await recipe.save();

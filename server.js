@@ -11,7 +11,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 //* Body Parser middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 //* Cors middleware
 app.use(
