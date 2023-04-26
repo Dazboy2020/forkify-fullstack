@@ -68,8 +68,9 @@ export const loadSearchResults = async function (query) {
 	}
 };
 
-const persistBookmarks = function () {
+const persistBookmarks = function (recipe) {
 	localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+	addRecipetoBookmarks(recipe);
 };
 
 export const getSearchResultsPage = function (page = state.search.page) {
@@ -94,8 +95,8 @@ export const addBookmark = function (recipe) {
 	state.bookmarks.push(recipe);
 	//*mark current recipe as bookmarked
 	state.recipe.bookmarked = true;
-	addRecipetoBookmarks(recipe);
-	persistBookmarks();
+
+	persistBookmarks(recipe);
 };
 
 export const deleteBookmark = function (id) {
