@@ -1,5 +1,6 @@
 import axios from 'axios';
 import RecipesApi from '../services/recipesApi.js';
+import { async } from 'regenerator-runtime';
 
 export async function addRecipetoBookmarks(recipe) {
 	try {
@@ -16,6 +17,14 @@ export async function addRecipetoBookmarks(recipe) {
 		};
 		console.log(newBookmark);
 		await RecipesApi.bookmarkRecipe(newBookmark);
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function deleteBookmarkMongo(recipe) {
+	try {
+		await RecipesApi.deleteRecipeMongo(recipe);
 	} catch (error) {
 		console.log(error);
 	}

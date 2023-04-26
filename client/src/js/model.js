@@ -7,6 +7,7 @@ import bookmarksView from './views/bookmarksView.js';
 import RecipesApi from '../services/recipesApi.js';
 import axios from 'axios';
 import { addRecipetoBookmarks } from './bookmarks.js';
+import { deleteBookmarkMongo } from './bookmarks.js';
 
 export const state = {
 	recipe: {},
@@ -103,10 +104,9 @@ export const deleteBookmark = function (id) {
 	//* Delete bookmark
 	const index = state.bookmarks.findIndex((el) => el.id === id);
 	state.bookmarks.splice(index, 1);
-
 	//*mark current recipe as NOT bookmarked
 	state.recipe.bookmarked = false;
-
+	deleteBookmarkMongo(id);
 	persistBookmarks();
 };
 
