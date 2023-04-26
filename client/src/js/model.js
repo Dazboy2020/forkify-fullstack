@@ -1,5 +1,8 @@
 import { async } from 'regenerator-runtime';
-import { API_URL, RES_PER_PAGE, API_KEY } from './config.js';
+
+import { API_KEY } from '../../../.env';
+import { RES_PER_PAGE, API_URL } from './config.js';
+
 import { AJAX } from './helper.js';
 import recipeView from './views/recipeView.js';
 import bookmarksView from './views/bookmarksView.js';
