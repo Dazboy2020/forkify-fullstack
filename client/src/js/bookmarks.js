@@ -6,7 +6,7 @@ import { state } from './model.js';
 export async function addRecipetoBookmarks(recipe) {
 	try {
 		const newBookmark = {
-			recipeID: recipe.id,
+			id: recipe.id,
 			bookmarked: true,
 			title: recipe.title,
 			sourceUrl: recipe.sourceUrl,
@@ -31,11 +31,14 @@ export async function deleteBookmarkMongo(id) {
 	}
 }
 
-async function getRecipes() {
+export async function getRecipes() {
 	try {
 		const recipe = await RecipesApi.getRecipesfromDB();
-		// state.bookmarks.push(recipe.data.data);
-		// console.log(recipe.data.data);
+		if (!recipe) return;
+		recipe.data.data.forEach((rec) => {
+			state.bookmarks.push(rec);
+		});
+		console.log(state.bookmarks);
 	} catch (error) {
 		console.log(`Something went wrong ${error}`);
 	}

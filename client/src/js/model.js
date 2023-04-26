@@ -97,7 +97,7 @@ export const addBookmark = function (recipe) {
 	state.recipe.bookmarked = true;
 	addRecipetoBookmarks(recipe);
 
-	persistBookmarks();
+	// persistBookmarks();
 };
 
 export const deleteBookmark = function (id) {
@@ -107,7 +107,7 @@ export const deleteBookmark = function (id) {
 	//*mark current recipe as NOT bookmarked
 	state.recipe.bookmarked = false;
 	deleteBookmarkMongo(id);
-	persistBookmarks();
+	// persistBookmarks();
 };
 
 const init = function () {

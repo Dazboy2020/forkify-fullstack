@@ -20,7 +20,7 @@ async function getSingleRecipe(req, res) {
 
 async function addNewRecipe(req, res) {
 	const recipe = new Recipe({
-		recipeID: req.body.recipeID,
+		id: req.body.id,
 		title: req.body.title,
 		sourceUrl: req.body.sourceUrl,
 		image: req.body.image,
@@ -58,7 +58,7 @@ async function editRecipe(req, res) {
 
 async function deleteRecipe(req, res) {
 	try {
-		await Recipe.findOneAndDelete(req.body.recipeID);
+		await Recipe.findOneAndDelete(req.body.id);
 		res.json({ success: true, data: {} });
 	} catch {
 		res.status(500).json({ success: false, error: 'Something went wrong!' });

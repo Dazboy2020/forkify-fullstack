@@ -10,6 +10,7 @@ import addRecipeView from './views/addRecipeView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import { getRecipes } from './bookmarks.js';
 import '../sass/main.scss';
 import '../img/favicon.png';
 import '../img/icons.svg';
@@ -25,6 +26,8 @@ const timeout = function (s) {
 		}, s * 1000);
 	});
 };
+
+// getRecipes();
 
 const controlRecipes = async function () {
 	try {
