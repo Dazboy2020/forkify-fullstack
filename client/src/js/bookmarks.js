@@ -1,6 +1,7 @@
 import axios from 'axios';
 import RecipesApi from '../services/recipesApi.js';
 import { async } from 'regenerator-runtime';
+import { state } from './model.js';
 
 export async function addRecipetoBookmarks(recipe) {
 	try {
@@ -22,9 +23,9 @@ export async function addRecipetoBookmarks(recipe) {
 	}
 }
 
-export async function deleteBookmarkMongo(recipe) {
+export async function deleteBookmarkMongo(id) {
 	try {
-		await RecipesApi.deleteRecipeMongo(recipe);
+		await RecipesApi.deleteRecipeMongo(id);
 	} catch (error) {
 		console.log(error);
 	}
@@ -33,7 +34,8 @@ export async function deleteBookmarkMongo(recipe) {
 async function getRecipes() {
 	try {
 		const recipe = await RecipesApi.getRecipesfromDB();
-		console.log(recipe.data.data);
+		// state.bookmarks.push(recipe.data.data);
+		// console.log(recipe.data.data);
 	} catch (error) {
 		console.log(`Something went wrong ${error}`);
 	}

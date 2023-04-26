@@ -39,7 +39,6 @@ class PaginationView extends View {
         </button>
         `;
 
-		console.log(this._data);
 		const numPages = Math.ceil(
 			this._data.results.length / this._data.resultsPerPage
 		);
