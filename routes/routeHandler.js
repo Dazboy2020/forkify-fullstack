@@ -58,7 +58,7 @@ async function editRecipe(req, res) {
 
 async function deleteRecipe(req, res) {
 	try {
-		await Recipe.findByIdAndDelete(req.params.id);
+		await Recipe.deleteOne(req.body.recipeID);
 		res.json({ success: true, data: {} });
 	} catch {
 		res.status(500).json({ success: false, error: 'Something went wrong!' });
