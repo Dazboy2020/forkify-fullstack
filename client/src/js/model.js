@@ -1,6 +1,8 @@
 import { async } from 'regenerator-runtime';
 
-import { API_KEY } from '../../../.env';
+// import { process.env.API_KEY } from '../../../.env';
+const API_KEY = process.env.API_KEY;
+console.log(process.env);
 import { RES_PER_PAGE, API_URL } from './config.js';
 
 import { AJAX } from './helper.js';

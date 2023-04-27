@@ -5,8 +5,9 @@ require('dotenv').config();
 const port = process.env.PORT || 5001;
 const connectDB = require('./config/db');
 connectDB();
-const app = express();
 
+console.log(process.env);
+const app = express();
 //*Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 //* Body Parser middleware
