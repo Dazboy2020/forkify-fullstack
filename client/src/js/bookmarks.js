@@ -2,6 +2,7 @@ import axios from 'axios';
 import RecipesApi from '../services/recipesApi.js';
 import { async } from 'regenerator-runtime';
 import { state } from './model.js';
+import { controlBookmarks } from './controller.js';
 
 export async function addRecipetoBookmarks(recipe) {
 	try {
@@ -34,11 +35,11 @@ export async function deleteBookmarkMongo(id) {
 export async function getRecipes() {
 	try {
 		const recipe = await RecipesApi.getRecipesfromDB();
-		if (!recipe) return;
+
 		recipe.data.data.forEach((rec) => {
 			state.bookmarks.push(rec);
 		});
-		console.log(state.bookmarks);
+		controlBookmarks();
 	} catch (error) {
 		console.log(`Something went wrong ${error}`);
 	}

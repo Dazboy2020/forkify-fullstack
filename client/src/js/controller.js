@@ -95,10 +95,11 @@ const controlAddBookmark = function () {
 	recipeView.update(model.state.recipe);
 
 	//* Render Bookmarks
+
 	bookmarksView.render(model.state.bookmarks);
 };
 
-const controlBookmarks = function () {
+export const controlBookmarks = function () {
 	bookmarksView.render(model.state.bookmarks);
 };
 

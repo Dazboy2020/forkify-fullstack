@@ -71,10 +71,6 @@ export const loadSearchResults = async function (query) {
 	}
 };
 
-const persistBookmarks = function () {
-	localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
-};
-
 export const getSearchResultsPage = function (page = state.search.page) {
 	state.search.page = page;
 	const start = (page - 1) * state.search.resultsPerPage; // 0
@@ -94,12 +90,10 @@ export const updateServings = function (newServings) {
 
 export const addBookmark = function (recipe) {
 	//*add bookmark
+	addRecipetoBookmarks(recipe);
 	state.bookmarks.push(recipe);
 	//*mark current recipe as bookmarked
 	state.recipe.bookmarked = true;
-	addRecipetoBookmarks(recipe);
-
-	// persistBookmarks();
 };
 
 export const deleteBookmark = function (id) {
@@ -109,18 +103,6 @@ export const deleteBookmark = function (id) {
 	//*mark current recipe as NOT bookmarked
 	state.recipe.bookmarked = false;
 	deleteBookmarkMongo(id);
-	// persistBookmarks();
-};
-
-// const init = function () {
-// 	const storage = localStorage.getItem('bookmarks');
-// 	if (storage) state.bookmarks = JSON.parse(storage);
-// };
-
-// init();
-
-const clearBookmarks = function () {
-	localStorage.clear('bookmarks');
 };
 
 export const uploadRecipe = async function (newRecipe) {
@@ -147,12 +129,9 @@ export const uploadRecipe = async function (newRecipe) {
 		};
 
 		const data = await AJAX(`${API_URL}?key=${API_KEY}`, recipe);
-		console.log(data);
 		state.recipe = createRecipeObject(data);
 		addBookmark(state.recipe);
 	} catch (err) {
 		throw err;
 	}
 };
-
-//comment to merge
