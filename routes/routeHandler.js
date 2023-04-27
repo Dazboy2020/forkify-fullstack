@@ -43,8 +43,13 @@ async function editRecipe(req, res) {
 			req.params.id,
 			{
 				$set: {
-					text: req.body.text,
-					tag: req.body.tag,
+					title: req.body.title,
+					sourceUrl: req.body.sourceUrl,
+					image: req.body.image,
+					publisher: req.body.publisher,
+					cookingTime: req.body.cookingTime,
+					servings: req.body.servings,
+					ingredients: req.body.ingredients,
 				},
 			},
 			{ new: true }
