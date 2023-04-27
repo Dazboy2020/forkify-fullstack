@@ -19,7 +19,7 @@ module.exports = {
 		compress: true,
 		historyApiFallback: true,
 		proxy: {
-			'/api': 'localhost: 5000',
+			'/api': 'http://localhost:5000',
 		},
 	},
 	module: {
@@ -49,4 +49,9 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin(),
 	],
+	performance: {
+		hints: false,
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000,
+	},
 };
