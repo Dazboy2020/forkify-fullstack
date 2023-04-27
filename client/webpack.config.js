@@ -3,10 +3,10 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: './src/js/controller.js',
 	output: {
-		path: path.resolve(__dirname, 'src'),
+		path: path.resolve(__dirname, '../public/'),
 		filename: 'bundle.js',
 	},
 	devServer: {
@@ -18,6 +18,9 @@ module.exports = {
 		hot: true,
 		compress: true,
 		historyApiFallback: true,
+		proxy: {
+			'/api': 'http://localhost:5000',
+		},
 	},
 	module: {
 		rules: [

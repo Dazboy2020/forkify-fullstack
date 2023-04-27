@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class RecipesApi {
 	constructor() {
-		this._apiUrl = 'http://localhost:5000/api/recipes';
+		this._apiUrl = '/api/recipes';
 	}
 
 	getRecipesfromDB() {
