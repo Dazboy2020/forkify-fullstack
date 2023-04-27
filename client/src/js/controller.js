@@ -27,8 +27,6 @@ const timeout = function (s) {
 	});
 };
 
-// getRecipes();
-
 const controlRecipes = async function () {
 	try {
 		const id = window.location.hash.slice(1);
@@ -77,8 +75,6 @@ const controlPagination = function (gotoPage) {
 	resultsView.render(model.getSearchResultsPage(gotoPage));
 	//* Render NEW pagination buttons
 	paginationView.render(model.state.search);
-
-	console.log(gotoPage);
 };
 
 const controlServings = function (newServings) {

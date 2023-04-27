@@ -17,6 +17,9 @@ class PaginationView extends View {
 
 	_generateMarkup() {
 		const curPage = this._data.page;
+		const numPages = Math.ceil(
+			this._data.results.length / this._data.resultsPerPage
+		);
 
 		const prevButton = `
         <button data-goto ="${
@@ -32,16 +35,16 @@ class PaginationView extends View {
         <button data-goto ="${
 					curPage + 1
 				}" class="btn--inline pagination__btn--next">
-            <span>Page ${curPage + 1}</span>
+            <span>Page ${curPage + 1}/${numPages}</span>
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-right"></use>
             </svg>
         </button>
         `;
 
-		const numPages = Math.ceil(
-			this._data.results.length / this._data.resultsPerPage
-		);
+		// const numPages = Math.ceil(
+		// 	this._data.results.length / this._data.resultsPerPage
+		// );
 		//* Page 1 and other pages
 		if (curPage === 1 && numPages > 1) {
 			return nextButton;
