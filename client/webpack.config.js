@@ -6,7 +6,7 @@ module.exports = {
 	mode: 'production',
 	entry: './src/js/controller.js',
 	output: {
-		path: path.resolve(__dirname, '../public/'),
+		path: path.resolve(__dirname, 'src'),
 		filename: 'bundle.js',
 	},
 	devServer: {
