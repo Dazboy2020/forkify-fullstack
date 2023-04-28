@@ -5,6 +5,7 @@ import logo from '../../img/logo.png';
 import fracty from 'fracty';
 
 class RecipeView extends View {
+	_logo = document.querySelector('.header__logo');
 	_parentElement = document.querySelector('.recipe');
 	_errorMessage = 'We could not find that recipe. Please try another!';
 	_message = '';
@@ -29,6 +30,33 @@ class RecipeView extends View {
 			const btn = e.target.closest('.btn--bookmark');
 			if (!btn) return;
 			handler();
+		});
+	}
+
+	addHandlerHome() {
+		this._logo.addEventListener('click', function (e) {
+			console.log('clicked');
+			// const recipeContainer = document.querySelector('.recipe');
+			// const searchResults = document.querySelector('.search-results');
+
+			// recipeContainer.innerHTML = '';
+
+			// const div = document.createElement('div');
+			// div.innerHTML = `
+			// <div class="recipe">
+			// 	<div class="message">
+			// 		<div>
+			// 			<svg>
+			// 				<use href="icons.svg#icon-smile"></use>
+			// 			</svg>
+			// 		</div>
+			// 		<p>Start by searching for a recipe or an ingredient. Have fun!</p>
+			// 	</div>
+			//  `;
+
+			// document.querySelector('.recipe').append(div);
+			// searchResults.innerHTML = '';
+			window.location.href = 'http://localhost:3000';
 		});
 	}
 
