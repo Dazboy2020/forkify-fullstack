@@ -36,26 +36,6 @@ class RecipeView extends View {
 	addHandlerHome() {
 		this._logo.addEventListener('click', function (e) {
 			console.log('clicked');
-			// const recipeContainer = document.querySelector('.recipe');
-			// const searchResults = document.querySelector('.search-results');
-
-			// recipeContainer.innerHTML = '';
-
-			// const div = document.createElement('div');
-			// div.innerHTML = `
-			// <div class="recipe">
-			// 	<div class="message">
-			// 		<div>
-			// 			<svg>
-			// 				<use href="icons.svg#icon-smile"></use>
-			// 			</svg>
-			// 		</div>
-			// 		<p>Start by searching for a recipe or an ingredient. Have fun!</p>
-			// 	</div>
-			//  `;
-
-			// document.querySelector('.recipe').append(div);
-			// searchResults.innerHTML = '';
 			window.location.href = 'http://localhost:3000';
 		});
 	}
