@@ -143,6 +143,5 @@ const init = function () {
 	paginationView.addHandlerClick(controlPagination);
 	addRecipeView.addHandlerUpload(controlAddRecipe);
 };
-// init();
 
 document.addEventListener('DOMContentLoaded', init);
